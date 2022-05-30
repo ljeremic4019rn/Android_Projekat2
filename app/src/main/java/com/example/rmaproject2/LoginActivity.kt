@@ -38,7 +38,7 @@ import com.example.rmaproject2.ui.theme.RMAProject2Theme
 
 class LoginActivity : ComponentActivity() {
     companion object {
-        const val EMAIL = "EMAIL"
+        const val USERNAME = "USERNAME"
         const val PASSWORD = "PASSWORD"
     }
 
@@ -82,7 +82,7 @@ fun LoginPage(navController: NavController) {
     val activity = (LocalContext.current as? Activity)
 
     val scaffoldState = rememberScaffoldState()
-    val emailVal = remember { mutableStateOf("") }
+    val usernameVal = remember { mutableStateOf("") }
     val passwordVal = remember { mutableStateOf("") }
 
     val sharedPreferences: SharedPreferences = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE)
@@ -133,10 +133,10 @@ fun LoginPage(navController: NavController) {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         OutlinedTextField(
-                            value = emailVal.value,
-                            onValueChange = { emailVal.value = it },
-                            label = { Text(text = "Email Address") },
-                            placeholder = { Text(text = "Email Address") },
+                            value = usernameVal.value,
+                            onValueChange = { usernameVal.value = it },
+                            label = { Text(text = "Username") },
+                            placeholder = { Text(text = "Username") },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth(0.8f)
                         )
@@ -168,10 +168,10 @@ fun LoginPage(navController: NavController) {
 
                         Button(
                             onClick = {
-                                if (emailVal.value.isEmpty()) {
+                                if (usernameVal.value.isEmpty()) {
                                     Toast.makeText(
                                         context,
-                                        "Please enter email address!",
+                                        "Please enter username!",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 } else if (passwordVal.value.isEmpty()) {
@@ -183,7 +183,7 @@ fun LoginPage(navController: NavController) {
                                 } else {
                                     sharedPreferences//stavimo koji je user trenutno ulogovan
                                         .edit()
-                                        .putString(LoginActivity.EMAIL, emailVal.toString())
+                                        .putString(LoginActivity.USERNAME, usernameVal.toString())
                                         .putString(LoginActivity.PASSWORD, passwordVal.toString())
                                         .apply();
                                     Toast.makeText(context,"Logged Successfully!",Toast.LENGTH_SHORT).show()
