@@ -1,5 +1,6 @@
 package com.example.rmaproject2
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -26,15 +27,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.startActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.rmaproject2.ui.theme.Purple500
 import com.example.rmaproject2.ui.theme.RMAProject2Theme
-import com.example.rmaproject2.viewModels.LoginViewModel
 
 //import com.example.rmaproject2.ui.view.Login.LoginPage
 
@@ -53,6 +51,10 @@ class LoginActivity : ComponentActivity() {
                 navigatePage()
             }
         }
+    }
+
+    override fun finish() {
+        super.finish()
     }
 }
 
@@ -77,6 +79,8 @@ fun LoginPage(navController: NavController) {
 
 
     val context = LocalContext.current
+    val activity = (LocalContext.current as? Activity)
+
     val scaffoldState = rememberScaffoldState()
     val emailVal = remember { mutableStateOf("") }
     val passwordVal = remember { mutableStateOf("") }
@@ -84,6 +88,7 @@ fun LoginPage(navController: NavController) {
     val sharedPreferences: SharedPreferences = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE)
 
     val passwordVisiblity = remember { mutableStateOf(false) }
+
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -160,6 +165,7 @@ fun LoginPage(navController: NavController) {
 
                         Spacer(modifier = Modifier.padding(10.dp))
 
+
                         Button(
                             onClick = {
                                 if (emailVal.value.isEmpty()) {
@@ -182,8 +188,9 @@ fun LoginPage(navController: NavController) {
                                         .apply();
                                     Toast.makeText(context,"Logged Successfully!",Toast.LENGTH_SHORT).show()
 
-                                    context.startActivity(Intent(context, MainActivity::class.java))
 
+                                    context.startActivity(Intent(context, AppActivity::class.java))
+                                    activity?.finish()
 
                                 }
                             },
@@ -210,8 +217,4 @@ fun LoginPage(navController: NavController) {
             }
         }
     }
-}
-
-fun changeActiv (){
-
 }

@@ -1,10 +1,7 @@
 package com.example.rmaproject2
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -12,15 +9,18 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : AppCompatActivity() {
 
-//    val sharedPreferences: SharedPreferences = getSharedPreferences(packageName, MODE_PRIVATE)
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
 
         val splashScreen: SplashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition {
 
-            val intent = Intent(this, LoginActivity::class.java)
+            val sharedPreferences = getSharedPreferences(packageName, MODE_PRIVATE)
+            val email = sharedPreferences.getString(LoginActivity.EMAIL, "")
+            intent = if (email == "") {
+                Intent(this, LoginActivity::class.java)
+            } else {
+                Intent(this, AppActivity::class.java)
+            }
             startActivity(intent)
             finish()
             false
