@@ -1,4 +1,4 @@
-package com.example.rmaproject2
+package com.example.rmaproject2.activities
 
 import android.app.Activity
 import android.content.Context
@@ -31,6 +31,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.rmaproject2.R
 import com.example.rmaproject2.ui.theme.Purple500
 import com.example.rmaproject2.ui.theme.RMAProject2Theme
 

@@ -1,10 +1,11 @@
-package com.example.rmaproject2
+package com.example.rmaproject2.activities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.rmaproject2.R
 
 
 class MainActivity : AppCompatActivity() {
