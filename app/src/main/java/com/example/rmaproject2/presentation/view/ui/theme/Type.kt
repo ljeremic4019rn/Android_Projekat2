@@ -1,4 +1,4 @@
-package com.example.rmaproject2.ui.theme
+package com.example.rmaproject2.presentation.view.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

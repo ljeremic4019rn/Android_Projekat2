@@ -1,4 +1,4 @@
-package com.example.rmaproject2.activities
+package com.example.rmaproject2.presentation.view.activities
 
 import android.content.Intent
 import android.os.Bundle

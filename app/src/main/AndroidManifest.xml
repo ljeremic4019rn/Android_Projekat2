@@ -10,15 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RMAProject2">
         <activity
-            android:name=".activities.AppActivity"
+            android:name="com.example.rmaproject2.presentation.view.activities.AppActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name="com.example.rmaproject2.presentation.view.activities.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.RMAProject2" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.example.rmaproject2.presentation.view.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
             <intent-filter>

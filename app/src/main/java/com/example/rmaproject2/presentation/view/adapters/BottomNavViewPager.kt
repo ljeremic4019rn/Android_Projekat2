@@ -1,11 +1,11 @@
-package com.example.rmaproject2.viewPagers
+package com.example.rmaproject2.presentation.view.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.rmaproject2.fragments.NotesFragment
-import com.example.rmaproject2.fragments.ScheduleFragment
-import com.example.rmaproject2.fragments.StatisticsFragment
+import com.example.rmaproject2.presentation.view.fragments.NotesFragment
+import com.example.rmaproject2.presentation.view.fragments.ScheduleFragment
+import com.example.rmaproject2.presentation.view.fragments.StatisticsFragment
 
 class BottomNavViewPager(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
