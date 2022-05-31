@@ -1,16 +1,16 @@
 package com.example.rmaproject2.presentation.view.recycler.diff
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.rmaproject2.data.models.Schedule
+import com.example.rmaproject2.data.models.Course
 
-class ScheduleDiffCallback : DiffUtil.ItemCallback<Schedule>(){
+class CourseDiffCallback : DiffUtil.ItemCallback<Course>(){
 
-    override fun areItemsTheSame(oldItem: Schedule, newItem: Schedule): Boolean {
+    override fun areItemsTheSame(oldItem: Course, newItem: Course): Boolean {
         return oldItem.id == newItem.id
 
     }
 
-    override fun areContentsTheSame(oldItem: Schedule, newItem: Schedule): Boolean {
+    override fun areContentsTheSame(oldItem: Course, newItem: Course): Boolean {
         return  oldItem.subject == newItem.subject &&
                 oldItem.type == newItem.type &&
                 oldItem.professor == newItem.professor &&

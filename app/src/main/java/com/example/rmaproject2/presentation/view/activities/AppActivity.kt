@@ -31,7 +31,7 @@ class AppActivity : AppCompatActivity() {
     private fun initNavigation() {
         (findViewById<View>(R.id.bottomNavigation) as BottomNavigationView).setOnItemSelectedListener { item: MenuItem ->
             when (item.itemId) {
-                R.id.navigation_1 -> viewPager.setCurrentItem(BottomNavViewPager.FRAG_1_SCHEDULE, false)
+                R.id.navigation_1 -> viewPager.setCurrentItem(BottomNavViewPager.FRAG_1_COURSE, false)
                 R.id.navigation_2 -> viewPager.setCurrentItem(BottomNavViewPager.FRAG_2_NOTES, false)
                 R.id.navigation_3 -> viewPager.setCurrentItem(BottomNavViewPager.FRAG_3_STATS, false)
             }

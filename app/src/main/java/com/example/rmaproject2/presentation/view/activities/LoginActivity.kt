@@ -35,7 +35,6 @@ import com.example.rmaproject2.R
 import com.example.rmaproject2.presentation.view.ui.theme.Purple500
 import com.example.rmaproject2.presentation.view.ui.theme.RMAProject2Theme
 
-//import com.example.rmaproject2.presentation.view.ui.view.Login.LoginPage
 
 class LoginActivity : ComponentActivity() {
     companion object {

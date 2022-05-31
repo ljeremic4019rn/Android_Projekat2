@@ -1,6 +1,6 @@
 package com.example.rmaproject2.data.models
 
-data class Schedule(
+data class Course(
     val id: String,
     val subject: String,
     val type: String,
