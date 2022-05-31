@@ -12,7 +12,7 @@ interface CourseContract {
 
         fun fetchAllCourses()
         fun getAllCourses()
-        fun getByFilter(subject: String, professor: String, group: String, day: String)
+        fun getByFilter(subjectOrProfessor: String, group: String, day: String)
 
     }
 }

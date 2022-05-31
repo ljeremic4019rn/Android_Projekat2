@@ -7,7 +7,7 @@ import com.example.rmaproject2.data.models.course.CourseEntity
 
 @Database(
     entities = [CourseEntity::class],
-    version = 3,
+    version = 4,
     exportSchema = false)
 @TypeConverters()
 abstract class CourseDataBase : RoomDatabase(){

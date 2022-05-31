@@ -83,9 +83,20 @@ class CourseViewModel (private val courseRepository: CourseRepository ) : ViewMo
         subscriptions.add(subscription)
     }
 
-    override fun getByFilter(subject: String, professor: String, group: String, day: String) {
-        TODO("Not yet implemented")
+    override fun getByFilter(subjectOrProfessor: String, group: String, day: String) {
+        val subscription = courseRepository
+            .getByFilter(subjectOrProfessor, group, day)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    courseState.value = CourseState.Success(it)
+                },
+                {
+                    courseState.value = CourseState.Error("Error happened while fetching data from db")
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
     }
-
-
 }

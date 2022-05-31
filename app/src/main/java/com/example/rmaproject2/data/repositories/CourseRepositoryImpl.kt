@@ -24,7 +24,7 @@ class CourseRepositoryImpl (
                         subject = courseResponse.predmet,
                         type = courseResponse.tip,
                         professor = courseResponse.nastavnik,
-                        group = courseResponse.grupe,
+                        groups = courseResponse.grupe,
                         day = courseResponse.dan,
                         time = courseResponse.termin,
                         classroom = courseResponse.ucionica
@@ -42,18 +42,41 @@ class CourseRepositoryImpl (
             .getAll()
             .map { it ->
                 it.map {
-                    Course(it.id, it.subject, it.type, it.professor, it.classroom, it.group, it.day, it.time)
+                    Course(
+                        it.id,
+                        it.subject,
+                        it.type,
+                        it.professor,
+                        it.classroom,
+                        it.groups,
+                        it.day,
+                        it.time
+                    )
                 }
             }
     }
 
     override fun getByFilter(
-        subject: String,
-        professor: String,
+        subjectOrProfessor: String,
         group: String,
         day: String
     ): Observable<List<Course>> {
-        TODO("Not yet implemented")
+        return localDataSource
+            .getAll()//todo
+            .map { it ->
+                it.map {
+                    Course(
+                        it.id,
+                        it.subject,
+                        it.type,
+                        it.professor,
+                        it.classroom,
+                        it.groups,
+                        it.day,
+                        it.time
+                    )
+                }
+            }
     }
 
 }

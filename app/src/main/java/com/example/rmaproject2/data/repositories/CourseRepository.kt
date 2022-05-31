@@ -8,6 +8,6 @@ interface CourseRepository {
 
     fun fetchAll(): Observable<Resource<Unit>>
     fun getAll(): Observable<List<Course>>
-    fun getByFilter(subject: String, professor: String, group: String, day: String): Observable<List<Course>>
+    fun getByFilter(subjectOrProfessor: String, group: String, day: String): Observable<List<Course>>
 
 }

@@ -10,7 +10,7 @@ class CourseEntity(
     val subject: String,
     val type: String,
     val professor: String,
-    val group: String,
+    val groups: String,
     val day: String,
     val time: String,
     val classroom: String
