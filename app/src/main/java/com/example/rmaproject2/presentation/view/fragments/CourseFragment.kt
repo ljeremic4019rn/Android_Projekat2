@@ -19,7 +19,7 @@ import timber.log.Timber
 import androidx.lifecycle.Observer
 class CourseFragment: Fragment(R.layout.fragment_course) {
 
-    private val mainViewModel: CourseContract.ViewModel by sharedViewModel<CourseViewModel>()
+    private val courseViewModel: CourseContract.ViewModel by sharedViewModel<CourseViewModel>()
     private var _binding: FragmentCourseBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: CourseAdapter
@@ -59,12 +59,12 @@ class CourseFragment: Fragment(R.layout.fragment_course) {
     }
 
     private fun initObservers() {
-        mainViewModel.moviesState.observe(viewLifecycleOwner, Observer {
-            Timber.e(it.toString())
-            renderState(it)
+        courseViewModel.courseState.observe(viewLifecycleOwner, Observer { courseState ->
+            Timber.e(courseState.toString())
+            renderState(courseState)
         })
-        mainViewModel.getAllCourses()
-        mainViewModel.fetchAllCourses()
+        courseViewModel.getAllCourses()
+        courseViewModel.fetchAllCourses()
     }
 
     private fun renderState(state: CourseState) {

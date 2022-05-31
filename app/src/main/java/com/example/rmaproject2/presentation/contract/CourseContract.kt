@@ -8,7 +8,7 @@ import io.reactivex.Observable
 interface CourseContract {
     interface ViewModel {
 
-        val moviesState: LiveData<CourseState>
+        val courseState: LiveData<CourseState>
 
         fun fetchAllCourses()
         fun getAllCourses()

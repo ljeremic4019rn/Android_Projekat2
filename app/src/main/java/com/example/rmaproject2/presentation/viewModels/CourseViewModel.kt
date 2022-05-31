@@ -9,14 +9,12 @@ import com.example.rmaproject2.presentation.view.states.CourseState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 
 class CourseViewModel (private val courseRepository: CourseRepository ) : ViewModel(), CourseContract.ViewModel   {
 
     private val subscriptions = CompositeDisposable()
-    override val moviesState: MutableLiveData<CourseState> = MutableLiveData()
+    override val courseState: MutableLiveData<CourseState> = MutableLiveData()
 //    private val publishSubject: PublishSubject<String> = PublishSubject.create()
 
 
@@ -55,13 +53,13 @@ class CourseViewModel (private val courseRepository: CourseRepository ) : ViewMo
             .subscribe(
                 {
                     when(it) {
-                        is Resource.Loading -> moviesState.value = CourseState.Loading
-                        is Resource.Success -> moviesState.value = CourseState.DataFetched
-                        is Resource.Error -> moviesState.value = CourseState.Error("Error happened while fetching data from the server")
+                        is Resource.Loading -> courseState.value = CourseState.Loading
+                        is Resource.Success -> courseState.value = CourseState.DataFetched
+                        is Resource.Error -> courseState.value = CourseState.Error("Error happened while fetching data from the server")
                     }
                 },
                 {
-                    moviesState.value = CourseState.Error("Error happened while fetching data from the server")
+                    courseState.value = CourseState.Error("Error happened while fetching data from the server")
                     Timber.e(it)
                 }
             )
@@ -75,10 +73,10 @@ class CourseViewModel (private val courseRepository: CourseRepository ) : ViewMo
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    moviesState.value = CourseState.Success(it)
+                    courseState.value = CourseState.Success(it)
                 },
                 {
-                    moviesState.value = CourseState.Error("Error happened while fetching data from db")
+                    courseState.value = CourseState.Error("Error happened while fetching data from db")
                     Timber.e(it)
                 }
             )
