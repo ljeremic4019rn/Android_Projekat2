@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.rmaproject2.databinding.NoteItemBinding
-import com.example.rmaproject2.data.models.Note
+import com.example.rmaproject2.data.models.note.Note
 import com.example.rmaproject2.presentation.view.recycler.diff.NotesDiffCallback
 import com.example.rmaproject2.presentation.view.recycler.viewHolder.NotesViewHolder
 

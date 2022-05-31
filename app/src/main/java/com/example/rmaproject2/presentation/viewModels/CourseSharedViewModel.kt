@@ -7,7 +7,7 @@ import com.example.rmaproject2.presentation.contract.CourseContract
 import com.example.rmaproject2.presentation.view.states.CourseState
 import io.reactivex.disposables.CompositeDisposable
 
-class CourseSharedViewModel (private val movieRepository: CourseRepository ) : ViewModel(), CourseContract.ViewModel   {
+class CourseSharedViewModel (private val courseRepository: CourseRepository ) : ViewModel(), CourseContract.ViewModel   {
 
     private val subscriptions = CompositeDisposable()
     override val moviesState: MutableLiveData<CourseState> = MutableLiveData()
@@ -20,19 +20,9 @@ class CourseSharedViewModel (private val movieRepository: CourseRepository ) : V
         TODO("Not yet implemented")
     }
 
-    override fun getByProfessor(name: String) {
+    override fun getByFilter(subject: String, professor: String, group: String, day: String) {
         TODO("Not yet implemented")
     }
 
-    override fun getBySubject(name: String) {
-        TODO("Not yet implemented")
-    }
 
-    override fun getByGroup(name: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun getByDay(name: String) {
-        TODO("Not yet implemented")
-    }
 }

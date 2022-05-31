@@ -94,13 +94,9 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
     // Koin
-    def koinVersion = '2.1.5-mp'
-    implementation "co.touchlab:koin-android:$koinVersion"
-    implementation "co.touchlab:koin-androidx-scope:$koinVersion"
-    implementation "co.touchlab:koin-androidx-viewmodel:$koinVersion"
-    implementation "co.touchlab:koin-androidx-ext:$koinVersion"
-    testImplementation "co.touchlab:koin-test:3.0.2-khan"
-    implementation "co.touchlab:koin-core:3.0.2-khan"
+    def koinVersion = '3.2.0'
+    implementation "io.insert-koin:koin-core:$koinVersion"
+    implementation "io.insert-koin:koin-android:$koinVersion"
 
     /* DATA */
 

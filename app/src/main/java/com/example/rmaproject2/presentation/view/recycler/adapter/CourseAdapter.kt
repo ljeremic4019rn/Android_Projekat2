@@ -3,7 +3,7 @@ package com.example.rmaproject2.presentation.view.recycler.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.example.rmaproject2.data.models.Course
+import com.example.rmaproject2.data.models.course.Course
 import com.example.rmaproject2.databinding.CourseItemBinding
 import com.example.rmaproject2.presentation.view.recycler.diff.CourseDiffCallback
 import com.example.rmaproject2.presentation.view.recycler.viewHolder.CourseViewHolder

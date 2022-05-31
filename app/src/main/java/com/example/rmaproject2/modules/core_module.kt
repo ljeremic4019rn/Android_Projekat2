@@ -1,13 +1,14 @@
-package rs.raf.vezbe11.modules
-
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.room.Room
+import com.example.rmaproject2.data.datasource.local.CourseDataBase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -21,9 +22,9 @@ val coreModule = module {
         androidApplication().getSharedPreferences(androidApplication().packageName, Context.MODE_PRIVATE)
     }
 
-//    single { Room.databaseBuilder(androidContext(), ScheduleDataBase::class.java, "MovieDb")
-//        .fallbackToDestructiveMigration()
-//        .build() }
+    single { Room.databaseBuilder(androidContext(), CourseDataBase::class.java, "courses")
+        .fallbackToDestructiveMigration()
+        .build() }
 
     single { createRetrofit(moshi = get(), httpClient = get()) }
 
@@ -38,9 +39,7 @@ fun createMoshi(): Moshi {
         .build()
 }
 
-fun createRetrofit(moshi: Moshi,
-                   httpClient: OkHttpClient
-): Retrofit {
+fun createRetrofit(moshi: Moshi,httpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .baseUrl("https://rfidis.raf.edu.rs/raspored/json.php/")
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -68,4 +67,3 @@ fun createOkHttpClient(): OkHttpClient {
 inline fun <reified T> create(retrofit: Retrofit): T  {
     return retrofit.create(T::class.java)
 }
-

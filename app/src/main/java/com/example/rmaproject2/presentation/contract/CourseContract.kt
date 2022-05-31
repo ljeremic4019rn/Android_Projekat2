@@ -1,7 +1,9 @@
 package com.example.rmaproject2.presentation.contract
 
 import androidx.lifecycle.LiveData
+import com.example.rmaproject2.data.models.course.Course
 import com.example.rmaproject2.presentation.view.states.CourseState
+import io.reactivex.Observable
 
 interface CourseContract {
     interface ViewModel {
@@ -10,9 +12,7 @@ interface CourseContract {
 
         fun fetchAllCourses()
         fun getAllCourses()
-        fun getByProfessor(name: String)
-        fun getBySubject(name: String)
-        fun getByGroup(name: String)
-        fun getByDay(name: String)
+        fun getByFilter(subject: String, professor: String, group: String, day: String)
+
     }
 }

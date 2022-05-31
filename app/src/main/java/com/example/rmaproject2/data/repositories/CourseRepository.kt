@@ -1,14 +1,13 @@
 package com.example.rmaproject2.data.repositories
 
-import com.example.rmaproject2.data.models.Resource
-import com.example.rmaproject2.data.models.Course
-import io.reactivex.Completable
+import com.example.rmaproject2.data.models.course.Course
+import com.example.rmaproject2.data.models.course.Resource
 import io.reactivex.Observable
 
 interface CourseRepository {
 
-    fun fetchAll(): Observable<Resource<Unit>> // fetch dovlaci sa interneta
-    fun getAll(): Observable<List<Course>> // get dovlaci iz baze
-    fun getAllByName(name: String): Observable<List<Course>>
-    fun insert(course: Course): Completable
+    fun fetchAll(): Observable<Resource<Unit>>
+    fun getAll(): Observable<List<Course>>
+    fun getByFilter(subject: String, professor: String, group: String, day: String): Observable<List<Course>>
+
 }

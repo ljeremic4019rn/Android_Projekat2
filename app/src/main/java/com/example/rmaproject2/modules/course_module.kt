@@ -1,20 +1,19 @@
-package rs.raf.vezbe11.modules
-
+import com.example.rmaproject2.data.datasource.local.CourseDataBase
+import com.example.rmaproject2.data.datasource.remote.CourseService
 import com.example.rmaproject2.data.repositories.CourseRepository
+import com.example.rmaproject2.data.repositories.CourseRepositoryImpl
 import com.example.rmaproject2.presentation.viewModels.CourseSharedViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+val courseModule = module {
 
-val movieModule = module {
+    viewModel { CourseSharedViewModel(courseRepository = get()) }
 
-    viewModel { CourseSharedViewModel(movieRepository = get()) }
+    single<CourseRepository> { CourseRepositoryImpl(localDataSource = get(), remoteDataSource = get()) }
 
-//    single<CourseRepository> { MovieRepositoryImpl(localDataSource = get(), remoteDataSource = get()) }
-//
-//    single { get<MovieDataBase>().getMovieDao() }
-//
-//    single<MovieService> { create(retrofit = get()) }
+    single { get<CourseDataBase>().getCourseDao() }
+
+    single<CourseService> { create(retrofit = get()) }
 
 }
-

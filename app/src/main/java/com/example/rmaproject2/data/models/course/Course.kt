@@ -1,4 +1,4 @@
-package com.example.rmaproject2.data.models
+package com.example.rmaproject2.data.models.course
 
 data class Course(
     val id: String,

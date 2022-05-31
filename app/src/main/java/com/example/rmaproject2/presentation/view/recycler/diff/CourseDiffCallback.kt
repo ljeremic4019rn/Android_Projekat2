@@ -1,7 +1,7 @@
 package com.example.rmaproject2.presentation.view.recycler.diff
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.rmaproject2.data.models.Course
+import com.example.rmaproject2.data.models.course.Course
 
 class CourseDiffCallback : DiffUtil.ItemCallback<Course>(){
 

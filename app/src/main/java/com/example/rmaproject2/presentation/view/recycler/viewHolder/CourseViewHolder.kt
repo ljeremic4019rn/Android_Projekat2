@@ -1,7 +1,7 @@
 package com.example.rmaproject2.presentation.view.recycler.viewHolder
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rmaproject2.data.models.Course
+import com.example.rmaproject2.data.models.course.Course
 import com.example.rmaproject2.databinding.CourseItemBinding
 
 class CourseViewHolder (private val itemBinding: CourseItemBinding) : RecyclerView.ViewHolder(itemBinding.root){

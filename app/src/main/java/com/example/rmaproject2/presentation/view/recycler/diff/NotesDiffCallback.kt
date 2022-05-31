@@ -1,7 +1,7 @@
 package com.example.rmaproject2.presentation.view.recycler.diff
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.rmaproject2.data.models.Note
+import com.example.rmaproject2.data.models.note.Note
 
 class NotesDiffCallback : DiffUtil.ItemCallback<Note>(){
     override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
