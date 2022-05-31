@@ -4,12 +4,11 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class CourseResponse(
-    val id: String,
-    val subject: String,
-    val type: String,
-    val professor: String,
-    val classroom: String,
-    val group: String,
-    val day: String,
-    val time: String
+    val predmet: String,
+    val tip: String,
+    val nastavnik: String,
+    val grupe: String,
+    val dan: String,
+    val termin: String,
+    val ucionica: String
 )

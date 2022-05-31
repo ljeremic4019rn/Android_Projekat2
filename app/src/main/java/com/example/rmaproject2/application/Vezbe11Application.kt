@@ -1,4 +1,4 @@
-package com.example.rmaproject2
+package com.example.rmaproject2.application
 
 import android.app.Application
 import coreModule

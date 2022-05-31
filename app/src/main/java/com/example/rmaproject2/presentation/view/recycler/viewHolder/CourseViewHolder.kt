@@ -7,7 +7,7 @@ import com.example.rmaproject2.databinding.CourseItemBinding
 class CourseViewHolder (private val itemBinding: CourseItemBinding) : RecyclerView.ViewHolder(itemBinding.root){
 
     fun bind(course: Course){
-        itemBinding.subjectTv.text = course.subject
+        itemBinding.subjectTv.text = course.subject //todo lose se namestaju
         itemBinding.typeTv.text = course.type
         itemBinding.professorTv.text = course.professor
         itemBinding.classroomTv.text = course.classroom

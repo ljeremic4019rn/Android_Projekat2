@@ -7,6 +7,6 @@ import retrofit2.http.*
 
 
 interface  CourseService {
-    @GET
+    @GET("raspored/json.php")
     fun getAll(): Observable<List<CourseResponse>>
 }

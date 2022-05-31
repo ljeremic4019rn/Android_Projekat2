@@ -1,7 +1,7 @@
 package com.example.rmaproject2.data.models.course
 
 data class Course(
-    val id: String,
+    val id: Long,
     val subject: String,
     val type: String,
     val professor: String,

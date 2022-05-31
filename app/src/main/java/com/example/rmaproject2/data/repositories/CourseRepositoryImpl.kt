@@ -16,19 +16,18 @@ class CourseRepositoryImpl (
     override fun fetchAll(): Observable<Resource<Unit>> {
         return remoteDataSource
             .getAll()
-            .doOnNext {
+            .doOnNext { it ->
                 Timber.e("Upis u bazu")
-                val entities = it.map {
+                val entities = it.map { courseResponse ->
                     CourseEntity(
-                        it.id,
-                        it.subject,
-                        it.type,
-                        it.professor,
-                        it.group,
-                        it.day,
-                        it.time,
-                        it.classroom
-
+                        id = 0,
+                        subject = courseResponse.predmet,
+                        type = courseResponse.tip,
+                        professor = courseResponse.nastavnik,
+                        group = courseResponse.grupe,
+                        day = courseResponse.dan,
+                        time = courseResponse.termin,
+                        classroom = courseResponse.ucionica
                     )
                 }
                 localDataSource.deleteAndInsertAll(entities)
@@ -41,9 +40,9 @@ class CourseRepositoryImpl (
     override fun getAll(): Observable<List<Course>> {
         return localDataSource
             .getAll()
-            .map {
+            .map { it ->
                 it.map {
-                    Course(it.id, it.subject, it.type, it.professor, it.group, it.day, it.time, it.classroom)
+                    Course(it.id, it.subject, it.type, it.professor, it.classroom, it.group, it.day, it.time)
                 }
             }
     }
