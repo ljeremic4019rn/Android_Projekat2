@@ -36,9 +36,9 @@ class NotesViewModel (private val notesRepository: NotesRepository) : ViewModel(
         subscriptions.add(subscription)
     }
 
-    override fun getAllByTitle(title: String){
+    override fun getAllBySearch(search: String){
         val subscription = notesRepository
-            .getAllByTitle(title)
+            .getAllBySearch(search)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -54,26 +54,6 @@ class NotesViewModel (private val notesRepository: NotesRepository) : ViewModel(
                 }
             )
         subscriptions.add(subscription)    }
-
-    override fun getAllByContent(content: String){
-        val subscription = notesRepository
-            .getAllByContent(content)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    noteState.value = NoteState.Success(it)
-                },
-                {
-                    noteState.value = NoteState.Error("Error happened while fetching data from db")
-                    Timber.e(it)
-                },
-                {
-                    Timber.e("ON COMPLETE")
-                }
-            )
-        subscriptions.add(subscription)
-    }
 
     override fun getAllArchived() {
         val subscription = notesRepository
@@ -110,6 +90,21 @@ class NotesViewModel (private val notesRepository: NotesRepository) : ViewModel(
             )
         subscriptions.add(subscription)
     }
+
+    override fun chagneArchived(id: Long, arch: Boolean) {
+        val subscription = notesRepository
+            .changeArchived(id, arch)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    Timber.e("ARCHIVE CHANGED")
+                },
+                {
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)    }
 
     override fun insert(noteEntity: NoteEntity) {
         val subscription = notesRepository

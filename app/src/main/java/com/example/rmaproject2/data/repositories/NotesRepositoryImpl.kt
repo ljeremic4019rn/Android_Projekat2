@@ -1,7 +1,6 @@
 package com.example.rmaproject2.data.repositories
 
 import com.example.rmaproject2.data.datasource.local.NoteDao
-import com.example.rmaproject2.data.models.course.Course
 import com.example.rmaproject2.data.models.note.Note
 import com.example.rmaproject2.data.models.note.NoteEntity
 import io.reactivex.Completable
@@ -25,32 +24,13 @@ class NotesRepositoryImpl(private val localDataSource: NoteDao) : NotesRepositor
             }
     }
 
-    override fun getAllByTitle(title: String): Observable<List<Note>> {
+    override fun getAllBySearch(search: String): Observable<List<Note>> {
 
-        val queryTitle: String = "%$title%"
+        val querySearch: String = "%$search%"
 
-
-        return localDataSource
-            .getAllByTitle(queryTitle)
-            .map { it ->
-                it.map {
-                    Note(
-                        it.id,
-                        it.title,
-                        it.content,
-                        it.creationDate,
-                        it.archived
-                    )
-                }
-            }
-    }
-
-    override fun getAllByContent(content: String): Observable<List<Note>> {
-
-        val queryContent: String = "%$content%"
 
         return localDataSource
-            .getAllByContent(queryContent)
+            .getAllBySearch(querySearch)
             .map { it ->
                 it.map {
                     Note(
@@ -82,6 +62,10 @@ class NotesRepositoryImpl(private val localDataSource: NoteDao) : NotesRepositor
 
     override fun deleteById(id: Long): Completable {
          return localDataSource.deleteById(id)
+    }
+
+    override fun changeArchived(id: Long, arch: Boolean): Completable {
+        return localDataSource.changeArchived(id, arch)
     }
 
     override fun insert(noteEntity: NoteEntity): Completable {

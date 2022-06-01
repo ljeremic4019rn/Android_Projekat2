@@ -11,13 +11,10 @@ abstract class NoteDao {
     @Query("SELECT * FROM notes")
     abstract fun getAll(): Observable<List<NoteEntity>>
 
-    @Query("SELECT * FROM notes WHERE title LIKE :title")
-    abstract fun getAllByTitle(title: String): Observable<List<NoteEntity>>
+    @Query("SELECT * FROM notes WHERE title LIKE :search OR content LIKE :search ")
+    abstract fun getAllBySearch(search: String): Observable<List<NoteEntity>>
 
-    @Query("SELECT * FROM notes WHERE content LIKE :content")
-    abstract fun getAllByContent(content: String): Observable<List<NoteEntity>>
-
-    @Query("SELECT * FROM notes WHERE archived == 'true' ")
+    @Query("SELECT * FROM notes WHERE archived == '1' ")
     abstract fun getAllArchived(): Observable<List<NoteEntity>>
 
     @Insert( onConflict = OnConflictStrategy.REPLACE )//todo mozda jos
@@ -25,6 +22,9 @@ abstract class NoteDao {
 
     @Update
     abstract fun update(noteEntity: NoteEntity): Completable
+
+    @Query("UPDATE notes SET archived = :arch WHERE id == :id")
+    abstract fun changeArchived(id: Long, arch: Boolean): Completable
 
     @Query("DELETE FROM notes WHERE id == :id")
     abstract fun deleteById(id: Long): Completable

@@ -55,7 +55,13 @@ class NotesFragment : Fragment(R.layout.fragment_notes){
     }
 
     private fun initListeners() {
-        //todo add button
+        binding.switch1.setOnClickListener {
+            if(binding.switch1.isChecked) {
+                noteViewModel.getAllArchived()
+            } else {
+                noteViewModel.getAll()
+            }
+        }
     }
 
     private fun initObservers() {
