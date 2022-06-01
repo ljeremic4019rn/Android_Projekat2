@@ -58,21 +58,17 @@ class CourseRepositoryImpl (
 
     override fun getByFilter(subjectOrProfessor: String,group: String,day: String): Observable<List<Course>> {
 
-        val queryDay: String
-        val queryGroup: String
-        val subjectOrProf: String
 
-
-        queryDay = if(day == "Day") "%"
+        val queryDay: String = if(day == "Day") "%"
         else day
 
-        queryGroup = if(group == "Group") "%"
+        val queryGroup: String = if(group == "Group") "%"
         else "%$group%"
 
-        subjectOrProf = if(subjectOrProfessor == "") "%"
+        val subjectOrProf: String = if(subjectOrProfessor == "") "%"
         else "%$subjectOrProfessor%"
 
-        println("day " + queryDay + " grup " + queryGroup + " prof " + subjectOrProf)
+//        println("day " + queryDay + " grup " + queryGroup + " prof " + subjectOrProf)
 
 
         return localDataSource
