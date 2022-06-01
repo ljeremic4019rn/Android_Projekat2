@@ -18,7 +18,8 @@ import com.example.rmaproject2.presentation.viewModels.CourseViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 import androidx.lifecycle.Observer
-class CourseFragment: Fragment(R.layout.fragment_course) {
+
+class CourseFragment : Fragment(R.layout.fragment_course) {
 
     private val courseViewModel: CourseContract.ViewModel by sharedViewModel<CourseViewModel>()
     private var _binding: FragmentCourseBinding? = null
@@ -34,6 +35,7 @@ class CourseFragment: Fragment(R.layout.fragment_course) {
         _binding = FragmentCourseBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init(view)
@@ -46,7 +48,7 @@ class CourseFragment: Fragment(R.layout.fragment_course) {
         initSpinners(view)
     }
 
-    private fun initSpinners(view: View){
+    private fun initSpinners(view: View) {
         ArrayAdapter.createFromResource(
             view.context,
             R.array.days,
@@ -78,7 +80,7 @@ class CourseFragment: Fragment(R.layout.fragment_course) {
     }
 
     private fun initListeners() {
-        binding.searchButton.setOnClickListener{
+        binding.searchButton.setOnClickListener {
             val day = binding.spinnerDaySelect.selectedItem.toString()
             val group = binding.spinnerGroupSelect.selectedItem.toString()
             val profGroup = binding.filterEt.text.toString()
@@ -108,7 +110,8 @@ class CourseFragment: Fragment(R.layout.fragment_course) {
             }
             is CourseState.DataFetched -> {
                 showLoadingState(false)
-                Toast.makeText(context, "Fresh data fetched from the server", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Fresh data fetched from the server", Toast.LENGTH_LONG)
+                    .show()
             }
             is CourseState.Loading -> {
                 showLoadingState(true)

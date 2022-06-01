@@ -1,6 +1,5 @@
 package com.example.rmaproject2.presentation.view.fragments
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
@@ -26,19 +25,13 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 import java.time.LocalDateTime
 
-
-class NotesFragment : Fragment(R.layout.fragment_notes){
-
+class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     private val noteViewModel: NoteContract.ViewModel by sharedViewModel<NotesViewModel>()
     private var _binding: FragmentNotesBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: NotesAdapter
     private lateinit var fragContext: Context
-
-    companion object {
-        private const val REQUEST_RESULT = 1
-    }
 
 
     override fun onAttach(context: Context) {
@@ -54,6 +47,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes){
         _binding = FragmentNotesBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
@@ -74,18 +68,17 @@ class NotesFragment : Fragment(R.layout.fragment_notes){
 
     private fun initListeners() {
         binding.switch1.setOnClickListener {//todo ima bug opravi ga (kada se vise puta arhivira promeni se ekran)
-            if(binding.switch1.isChecked) {
+            if (binding.switch1.isChecked) {
                 noteViewModel.getAllArchived()
             } else {
                 noteViewModel.getAll()
             }
         }
 
-        binding.addNoteBtn.setOnClickListener{
-            val intent = Intent (activity, AddNoteActivity::class.java)
+        binding.addNoteBtn.setOnClickListener {
+            val intent = Intent(activity, AddNoteActivity::class.java)
             intent.putExtra("type", "add")
             addNoteActivity.launch(intent)
-
         }
     }
 
@@ -108,8 +101,8 @@ class NotesFragment : Fragment(R.layout.fragment_notes){
         }
     }
 
-    fun startEditActivity(title: String, content: String, id: Long){
-        val intent = Intent (activity, AddNoteActivity::class.java)
+    fun startEditActivity(title: String, content: String, id: Long) {
+        val intent = Intent(activity, AddNoteActivity::class.java)
         intent.putExtra("type", "edit")
         intent.putExtra("title", title)
         intent.putExtra("content", content)
@@ -118,28 +111,38 @@ class NotesFragment : Fragment(R.layout.fragment_notes){
         editNoteActivity.launch(intent)
     }
 
-    private val addNoteActivity: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == RESULT_OK) {
-            val data = it.data
-            val title = data?.getStringExtra("title")
-            val content = data?.getStringExtra("content")
-            if(title != null && content != null) {
-                noteViewModel.insert(NoteEntity(0, title, content, LocalDateTime.now().toString(),false))
+    private val addNoteActivity: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                val data = it.data
+                val title = data?.getStringExtra("title")
+                val content = data?.getStringExtra("content")
+                if (title != null && content != null) {
+                    noteViewModel.insert(
+                        NoteEntity(
+                            0,
+                            title,
+                            content,
+                            LocalDateTime.now().toString(),
+                            false
+                        )
+                    )
+                }
             }
         }
-    }
 
-    private val editNoteActivity: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == RESULT_OK) {
-            val data = it.data
-            val title = data?.getStringExtra("title")
-            val content = data?.getStringExtra("content")
-            val id = data?.getStringExtra("id").toString().toLong()
+    private val editNoteActivity: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                val data = it.data
+                val title = data?.getStringExtra("title")
+                val content = data?.getStringExtra("content")
+                val id = data?.getStringExtra("id").toString().toLong()
 
-            if(title != null && content != null)
-                noteViewModel.updateNote(id, title, content)
+                if (title != null && content != null)
+                    noteViewModel.updateNote(id, title, content)
+            }
         }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
