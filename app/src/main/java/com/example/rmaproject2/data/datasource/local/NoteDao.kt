@@ -7,14 +7,18 @@ import io.reactivex.Observable
 
 @Dao
 abstract class NoteDao {
+    /*
+    getAll i getAllArchived su okrenuti jer originalno se prvo prikazivali svi a onda se sklanjali
+    a sada je da se prikazu sklonjeni arhivirani, a na klik dugmeta se prikazu, mrzelo me da menjam imena metoda tako da je samo sql promenjen
+     */
 
-    @Query("SELECT * FROM notes WHERE archived == '0' ")
+    @Query("SELECT * FROM notes WHERE archived == '0' ")// ovo je samo ne arhivirani
     abstract fun getAll(): Observable<List<NoteEntity>>
 
     @Query("SELECT * FROM notes WHERE title LIKE :search OR content LIKE :search ")
     abstract fun getAllBySearch(search: String): Observable<List<NoteEntity>>
 
-    @Query("SELECT * FROM notes")
+    @Query("SELECT * FROM notes")// ovo je get all
     abstract fun getAllArchived(): Observable<List<NoteEntity>>
 
     @Insert( onConflict = OnConflictStrategy.REPLACE )//todo mozda jos

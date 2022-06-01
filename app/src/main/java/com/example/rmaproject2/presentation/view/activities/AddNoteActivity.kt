@@ -60,7 +60,8 @@ class AddNoteActivity : AppCompatActivity() {
             val returnIntent = Intent()
             returnIntent.putExtra("title", titleET.text.toString())
             returnIntent.putExtra("content", contentET.text.toString())
-            returnIntent.putExtra("id", id)
+            if (intent.getStringExtra("type").toString() == "edit")
+                returnIntent.putExtra("id", id)
 
             this.setResult(RESULT_OK, returnIntent)
             this.finish()

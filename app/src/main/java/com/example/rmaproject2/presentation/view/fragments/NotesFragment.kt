@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rmaproject2.R
+import com.example.rmaproject2.data.models.note.NoteEntity
 import com.example.rmaproject2.databinding.FragmentNotesBinding
 import com.example.rmaproject2.presentation.contract.NoteContract
 import com.example.rmaproject2.presentation.view.activities.AddNoteActivity
@@ -23,6 +24,7 @@ import com.example.rmaproject2.presentation.view.states.NoteState
 import com.example.rmaproject2.presentation.viewModels.NotesViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
+import java.time.LocalDateTime
 
 
 class NotesFragment : Fragment(R.layout.fragment_notes){
@@ -71,7 +73,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes){
     }
 
     private fun initListeners() {
-        binding.switch1.setOnClickListener {
+        binding.switch1.setOnClickListener {//todo ima bug opravi ga (kada se vise puta arhivira promeni se ekran)
             if(binding.switch1.isChecked) {
                 noteViewModel.getAllArchived()
             } else {
@@ -80,7 +82,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes){
         }
 
         binding.addNoteBtn.setOnClickListener{
-            //todo
+            val intent = Intent (activity, AddNoteActivity::class.java)
+            intent.putExtra("type", "add")
+            addNoteActivity.launch(intent)
+
         }
     }
 
@@ -119,8 +124,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes){
             val title = data?.getStringExtra("title")
             val content = data?.getStringExtra("content")
             if(title != null && content != null) {
-//                noteViewModel.insert() //todo
-
+                noteViewModel.insert(NoteEntity(0, title, content, LocalDateTime.now().toString(),false))
             }
         }
     }
