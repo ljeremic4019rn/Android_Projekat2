@@ -31,13 +31,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     private var _binding: FragmentNotesBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: NotesAdapter
-    private lateinit var fragContext: Context
 
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        fragContext = context
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
