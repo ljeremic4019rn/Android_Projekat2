@@ -25,8 +25,8 @@ abstract class CourseDao {
         deleteAll()
         insertAll(entities).blockingAwait()
     }
-
-//    @Query("SELECT * FROM courses where groupp LIKE ")//todo napravi query
-//    abstract fun getByFilter(subjectOrProfessor: String, group: String, type: String): Observable<List<CourseEntity>>
+//where professor LIKE :subjectOrProf OR subject LIKE :subjectOrProf     AND day LIKE :day AND groups LIKE :group
+    @Query("SELECT * FROM courses WHERE day LIKE :day AND groups LIKE :group AND (professor LIKE :subjectOrProf OR subject LIKE :subjectOrProf) ")//todo napravi query
+    abstract fun getByFilter(subjectOrProf: String, group: String, day: String): Observable<List<CourseEntity>>
 
 }

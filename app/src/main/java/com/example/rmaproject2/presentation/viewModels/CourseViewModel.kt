@@ -97,6 +97,7 @@ class CourseViewModel (private val courseRepository: CourseRepository ) : ViewMo
                     Timber.e(it)
                 }
             )
+
         subscriptions.add(subscription)
     }
 }
