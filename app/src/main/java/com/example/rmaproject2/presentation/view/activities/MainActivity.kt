@@ -13,22 +13,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
-   private val noteMV: NoteContract.ViewModel by viewModel<NotesViewModel>()//TODO SKLONI OVO KASNIJE
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
-        val noteEntity: NoteEntity= NoteEntity(
-            0,
-            "titlee",
-            "content",
-            "datee",
-            true
-        )
-
-        noteMV.insert(noteEntity)
-        noteMV.insert(noteEntity)
-
 
         val splashScreen: SplashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition {

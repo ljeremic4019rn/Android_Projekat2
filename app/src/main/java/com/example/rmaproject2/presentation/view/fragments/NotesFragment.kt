@@ -10,16 +10,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rmaproject2.R
-import com.example.rmaproject2.databinding.FragmentCourseBinding
 import com.example.rmaproject2.databinding.FragmentNotesBinding
 import com.example.rmaproject2.presentation.contract.NoteContract
-import com.example.rmaproject2.presentation.view.recycler.adapter.CourseAdapter
 import com.example.rmaproject2.presentation.view.recycler.adapter.NotesAdapter
-import com.example.rmaproject2.presentation.view.states.CourseState
 import com.example.rmaproject2.presentation.view.states.NoteState
 import com.example.rmaproject2.presentation.viewModels.NotesViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
+import androidx.lifecycle.Observer
 
 class NotesFragment : Fragment(R.layout.fragment_notes){
 
@@ -40,10 +38,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes){
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init(view)
+        init()
     }
 
-    private fun init(view: View) {
+    private fun init() {
         initRecycler()
         initListeners()
         initObservers()
@@ -57,38 +55,28 @@ class NotesFragment : Fragment(R.layout.fragment_notes){
     }
 
     private fun initListeners() {
-
+        //todo add button
     }
 
     private fun initObservers() {
-
+        noteViewModel.noteState.observe(viewLifecycleOwner, Observer { noteState ->
+            Timber.e(noteState.toString())
+            renderState(noteState)
+        })
+        noteViewModel.getAll()
     }
 
     private fun renderState(state: NoteState) {
         when (state) {
             is NoteState.Success -> {
-                showLoadingState(false)
                 adapter.submitList(state.notes)
             }
             is NoteState.Error -> {
-                showLoadingState(false)
                 Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
-            }
-            is NoteState.DataFetched -> {
-                showLoadingState(false)
-                Toast.makeText(context, "Fresh data fetched from the server", Toast.LENGTH_LONG).show()
-            }
-            is NoteState.Loading -> {
-                showLoadingState(true)
             }
         }
     }
 
-    private fun showLoadingState(loading: Boolean) {
-        binding.notesSearch.isVisible = !loading
-        binding.notesRV.isVisible = !loading
-        binding.loadingNotes.isVisible = loading
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

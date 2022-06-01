@@ -13,8 +13,8 @@ interface NoteContract {
         val noteState: LiveData<NoteState>
 //        val addDone: LiveData<AddMovieState> todo mozda
         fun getAll()
-        fun getAllByName(name: String)
-        fun getAllByContent(name: String)
+        fun getAllByTitle(title: String)
+        fun getAllByContent(content: String)
         fun getAllArchived()
         fun deleteById(id: Long)
         fun insert(noteEntity: NoteEntity)

@@ -7,7 +7,7 @@ import com.example.rmaproject2.data.models.note.NoteEntity
 
 @Database(
     entities = [NoteEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false)
 @TypeConverters()
 abstract class NoteDataBase: RoomDatabase() {
