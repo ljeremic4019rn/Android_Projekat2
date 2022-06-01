@@ -15,4 +15,5 @@ class CourseViewHolder (private val itemBinding: CourseItemBinding) : RecyclerVi
         itemBinding.dayTv.text = course.day
         itemBinding.timeTv.text = course.time
     }
+
 }

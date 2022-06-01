@@ -4,18 +4,15 @@ import com.example.rmaproject2.data.datasource.local.CourseDao
 import com.example.rmaproject2.data.datasource.remote.CourseService
 import com.example.rmaproject2.data.models.course.CourseEntity
 import com.example.rmaproject2.data.models.course.Course
-import com.example.rmaproject2.data.models.course.Resource
+import com.example.rmaproject2.data.models.Resource
 import io.reactivex.Observable
 import timber.log.Timber
 
-class CourseRepositoryImpl (
-    private val localDataSource: CourseDao,
-    private val remoteDataSource: CourseService
-) : CourseRepository {
+class CourseRepositoryImpl (private val localDataSource: CourseDao, private val remoteDataSource: CourseService) : CourseRepository {
 
     override fun fetchAll(): Observable<Resource<Unit>> {
         return remoteDataSource
-            .getAll()
+            .getAll()//nije isti kao Dao getAll
             .doOnNext { it ->
                 Timber.e("Upis u bazu")
                 val entities = it.map { courseResponse ->

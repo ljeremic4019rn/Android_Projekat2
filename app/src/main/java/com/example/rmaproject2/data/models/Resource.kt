@@ -1,4 +1,4 @@
-package com.example.rmaproject2.data.models.course
+package com.example.rmaproject2.data.models
 
 sealed class Resource <out T> {
     data class Success<out T>(val data: T) : Resource<T>()

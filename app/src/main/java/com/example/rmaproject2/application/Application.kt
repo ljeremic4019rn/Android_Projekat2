@@ -3,6 +3,7 @@ package com.example.rmaproject2.application
 import android.app.Application
 import coreModule
 import courseModule
+import noteModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
@@ -12,7 +13,7 @@ import org.koin.core.logger.Level
 
 import timber.log.Timber
 
-class Vezbe11Application : Application() {
+class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -31,13 +32,13 @@ class Vezbe11Application : Application() {
     private fun initKoin() {
         val modules = listOf(
             courseModule,
-            coreModule
-
+            coreModule,
+            noteModule
         )
         startKoin {
             androidLogger(Level.ERROR)
             // Use application context
-            androidContext(this@Vezbe11Application)
+            androidContext(this@Application)
             // Use properties from assets/koin.properties
             androidFileProperties()
             // Use koin fragment factory for fragment instantiation

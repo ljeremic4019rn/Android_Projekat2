@@ -7,12 +7,10 @@ import io.reactivex.Observable
 
 interface CourseContract {
     interface ViewModel {
-
         val courseState: LiveData<CourseState>
 
         fun fetchAllCourses()
         fun getAllCourses()
         fun getByFilter(subjectOrProfessor: String, group: String, day: String)
-
     }
 }

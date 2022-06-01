@@ -1,10 +1,14 @@
 package com.example.rmaproject2.data.models.note
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.*
 
 //import java.sql.Date
 
-data class Note(
+@Entity(tableName = "notes")
+class NoteEntity(
+    @PrimaryKey(autoGenerate = true)
     val id: Long,
     val title: String,
     val content: String,

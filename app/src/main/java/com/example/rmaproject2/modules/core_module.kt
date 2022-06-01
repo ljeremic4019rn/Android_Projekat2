@@ -2,6 +2,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.example.rmaproject2.data.datasource.local.CourseDataBase
+import com.example.rmaproject2.data.datasource.local.NoteDataBase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import okhttp3.OkHttpClient
@@ -23,6 +24,10 @@ val coreModule = module {
     }
 
     single { Room.databaseBuilder(androidContext(), CourseDataBase::class.java, "courses")
+        .fallbackToDestructiveMigration()
+        .build() }
+
+    single { Room.databaseBuilder(androidContext(), NoteDataBase::class.java, "notes")
         .fallbackToDestructiveMigration()
         .build() }
 

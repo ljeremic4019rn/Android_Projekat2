@@ -2,7 +2,7 @@ package com.example.rmaproject2.presentation.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.rmaproject2.data.models.course.Resource
+import com.example.rmaproject2.data.models.Resource
 import com.example.rmaproject2.data.repositories.CourseRepository
 import com.example.rmaproject2.presentation.contract.CourseContract
 import com.example.rmaproject2.presentation.view.states.CourseState

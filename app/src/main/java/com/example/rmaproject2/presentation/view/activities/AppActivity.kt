@@ -6,7 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.example.rmaproject2.R
-import com.example.rmaproject2.presentation.view.adapters.BottomNavViewPager
+import com.example.rmaproject2.presentation.view.recycler.adapter.BottomNavViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AppActivity : AppCompatActivity() {

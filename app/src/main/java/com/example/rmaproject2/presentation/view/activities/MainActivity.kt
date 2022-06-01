@@ -6,11 +6,29 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.rmaproject2.R
+import com.example.rmaproject2.data.models.note.NoteEntity
+import com.example.rmaproject2.presentation.contract.NoteContract
+import com.example.rmaproject2.presentation.viewModels.NotesViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
+   private val noteMV: NoteContract.ViewModel by viewModel<NotesViewModel>()//TODO SKLONI OVO KASNIJE
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+        val noteEntity: NoteEntity= NoteEntity(
+            0,
+            "titlee",
+            "content",
+            "datee",
+            true
+        )
+
+        noteMV.insert(noteEntity)
+        noteMV.insert(noteEntity)
+
 
         val splashScreen: SplashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition {

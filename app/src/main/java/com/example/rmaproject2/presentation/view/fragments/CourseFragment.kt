@@ -68,7 +68,6 @@ class CourseFragment: Fragment(R.layout.fragment_course) {
             // Apply the adapter to the spinner
             binding.spinnerGroupSelect.adapter = adapter
         }
-
     }
 
 

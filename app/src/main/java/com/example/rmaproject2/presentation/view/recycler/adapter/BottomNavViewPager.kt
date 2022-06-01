@@ -1,4 +1,4 @@
-package com.example.rmaproject2.presentation.view.adapters
+package com.example.rmaproject2.presentation.view.recycler.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

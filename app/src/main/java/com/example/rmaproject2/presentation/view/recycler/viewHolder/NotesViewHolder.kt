@@ -9,6 +9,6 @@ class NotesViewHolder(private val itemBinding: NoteItemBinding) : RecyclerView.V
     fun bind(note: Note){
         itemBinding.notesTitle.text = note.title
         itemBinding.noteContent.text = note.content
-        //todo ovde dugmici??
+        itemBinding.id.text = note.id.toString()
     }
 }
