@@ -50,7 +50,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes){
 
     private fun initRecycler() {
         binding.notesRV.layoutManager = LinearLayoutManager(context)
-        adapter = NotesAdapter()
+        adapter = NotesAdapter(noteViewModel)
         binding.notesRV.adapter = adapter
     }
 
@@ -61,6 +61,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes){
             } else {
                 noteViewModel.getAll()
             }
+        }
+
+        binding.addNoteBtn.setOnClickListener{
+            //todo
         }
     }
 
