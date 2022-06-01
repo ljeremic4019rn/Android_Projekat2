@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -74,6 +75,11 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             intent.putExtra("type", "add")
             addNoteActivity.launch(intent)
         }
+
+        binding.notesSearch.doAfterTextChanged {
+            val filter = it.toString()
+            noteViewModel.getAllBySearch(filter)
+        }
     }
 
     private fun initObservers() {
@@ -105,8 +111,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         editNoteActivity.launch(intent)
     }
 
-    private val addNoteActivity: ActivityResultLauncher<Intent> =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+    private val addNoteActivity: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 val data = it.data
                 val title = data?.getStringExtra("title")
@@ -125,8 +130,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             }
         }
 
-    private val editNoteActivity: ActivityResultLauncher<Intent> =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+    private val editNoteActivity: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 val data = it.data
                 val title = data?.getStringExtra("title")
