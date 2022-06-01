@@ -91,7 +91,7 @@ class NotesViewModel (private val notesRepository: NotesRepository) : ViewModel(
         subscriptions.add(subscription)
     }
 
-    override fun chagneArchived(id: Long, arch: Boolean) {
+    override fun changeArchived(id: Long, arch: Boolean) {
         val subscription = notesRepository
             .changeArchived(id, arch)
             .subscribeOn(Schedulers.io())
@@ -122,9 +122,9 @@ class NotesViewModel (private val notesRepository: NotesRepository) : ViewModel(
         subscriptions.add(subscription)
     }
 
-    override fun updateNote(noteEntity: NoteEntity) {
+    override fun updateNote(id: Long, title: String, content: String) {
         val subscription = notesRepository
-            .updateNote(noteEntity)
+            .updateNote(id, title, content)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

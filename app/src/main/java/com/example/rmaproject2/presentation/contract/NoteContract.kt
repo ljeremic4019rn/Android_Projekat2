@@ -16,8 +16,8 @@ interface NoteContract {
         fun getAllBySearch(search: String)
         fun getAllArchived()
         fun deleteById(id: Long)
-        fun chagneArchived(id: Long, arch: Boolean)
+        fun changeArchived(id: Long, arch: Boolean)
         fun insert(noteEntity: NoteEntity)
-        fun updateNote(noteEntity: NoteEntity)
+        fun updateNote(id: Long, title: String, content: String)
     }
 }

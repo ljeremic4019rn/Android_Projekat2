@@ -6,6 +6,9 @@
     <string name="dash">-</string>
     <string name="trazi">Trazi</string>
     <string name="professor_class">Professor/Class</string>
+    <string name="back">Back</string>
+    <string name="applay_edit">Applay edit</string>
+    <string name="save">save</string>
 
 
     <string-array name="groups">

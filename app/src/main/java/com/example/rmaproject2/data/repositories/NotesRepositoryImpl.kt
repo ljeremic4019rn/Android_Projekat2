@@ -26,7 +26,7 @@ class NotesRepositoryImpl(private val localDataSource: NoteDao) : NotesRepositor
 
     override fun getAllBySearch(search: String): Observable<List<Note>> {
 
-        val querySearch: String = "%$search%"
+        val querySearch = "%$search%"
 
 
         return localDataSource
@@ -72,8 +72,8 @@ class NotesRepositoryImpl(private val localDataSource: NoteDao) : NotesRepositor
         return localDataSource.insert(noteEntity)
     }
 
-    override fun updateNote(noteEntity: NoteEntity): Completable {
-         return localDataSource.update(noteEntity)
+    override fun updateNote(id: Long, title: String, content: String): Completable {
+         return localDataSource.update(id, title, content)
     }
 
 }

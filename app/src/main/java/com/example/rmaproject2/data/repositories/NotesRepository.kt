@@ -12,5 +12,5 @@ interface NotesRepository {
     fun deleteById(id: Long): Completable
     fun changeArchived(id: Long, arch:Boolean): Completable
     fun insert(noteEntity: NoteEntity): Completable
-    fun updateNote(noteEntity: NoteEntity): Completable
+    fun updateNote(id: Long, title: String, content: String): Completable
 }
