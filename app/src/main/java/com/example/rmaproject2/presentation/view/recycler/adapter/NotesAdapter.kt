@@ -14,28 +14,10 @@ class NotesAdapter (private val noteViewModel: NoteContract.ViewModel, private v
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
         val itemBinding = NoteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        initListeners(itemBinding)//todo proveri da li je ovo dobro
-        return NotesViewHolder(itemBinding)
+        return NotesViewHolder(itemBinding, noteViewModel, notesFragment)
     }
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
-    private fun initListeners(itemBinding: NoteItemBinding){
-        itemBinding.archiveBtn.setOnClickListener{
-            val bool: Boolean = itemBinding.archived.text.toString() == "false"
-            itemBinding.archived.text = bool.toString()
-            noteViewModel.changeArchived(itemBinding.id.text.toString().toLong(), bool)
-        }
-
-        itemBinding.deleteBtn.setOnClickListener{
-            noteViewModel.deleteById(itemBinding.id.text.toString().toLong())
-        }
-
-        itemBinding.editBtn.setOnClickListener{
-            notesFragment.startEditActivity(itemBinding.notesTitle.text.toString(), itemBinding.noteContent.text.toString(), itemBinding.id.text.toString().toLong())
-        }
-    }
-
 }
