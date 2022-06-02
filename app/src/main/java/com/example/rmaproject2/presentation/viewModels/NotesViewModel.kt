@@ -1,8 +1,11 @@
 package com.example.rmaproject2.presentation.viewModels
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.rmaproject2.data.models.note.Note
 import com.example.rmaproject2.data.models.note.NoteEntity
+import com.example.rmaproject2.data.models.note.StatisticsHolder
 import com.example.rmaproject2.data.repositories.NotesRepository
 import com.example.rmaproject2.presentation.contract.NoteContract
 import com.example.rmaproject2.presentation.view.states.CourseState
@@ -11,11 +14,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.time.LocalDateTime
 
-class NotesViewModel (private val notesRepository: NotesRepository) : ViewModel(), NoteContract.ViewModel  {
+class NotesViewModel (private val notesRepository: NotesRepository, override val statisticsHolder: StatisticsHolder) : ViewModel(), NoteContract.ViewModel  {
     private val subscriptions = CompositeDisposable()
     override val noteState: MutableLiveData<NoteState> = MutableLiveData()
-
 
     override fun getAll(){
         val subscription = notesRepository
@@ -55,9 +58,9 @@ class NotesViewModel (private val notesRepository: NotesRepository) : ViewModel(
             )
         subscriptions.add(subscription)    }
 
-    override fun getAllArchived() {
+    override fun getAllNonArchived() {
         val subscription = notesRepository
-            .getAllArchived()
+            .getAllNonArchived()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -120,6 +123,8 @@ class NotesViewModel (private val notesRepository: NotesRepository) : ViewModel(
                 }
             )
         subscriptions.add(subscription)
+
+        statisticsHolder.addToCurrentDay()//todo ne zaboravi ovoga
     }
 
     override fun updateNote(id: Long, title: String, content: String) {
@@ -137,5 +142,30 @@ class NotesViewModel (private val notesRepository: NotesRepository) : ViewModel(
             )
         subscriptions.add(subscription)
     }
+
+    @SuppressLint("CheckResult")
+    override fun countExistingStatistics() {
+        var result: List<Note>? = null
+
+        notesRepository
+            .getAll()
+            .subscribe(
+                { it ->
+                    result = NoteState.Success(it).notes
+
+                    result!!.forEach { println("PRINT $it") }
+
+                    statisticsHolder.fillWithExistingData(result!!.reversed())
+
+                },
+                {
+                    noteState.value = NoteState.Error("Error happened while fetching data from db")
+                    Timber.e(it)                },
+                {
+                    Timber.e("ON COMPLETE")
+                }
+            )
+    }
+
 
 }

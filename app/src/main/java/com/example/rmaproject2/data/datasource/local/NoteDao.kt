@@ -12,14 +12,14 @@ abstract class NoteDao {
     a sada je da se prikazu sklonjeni arhivirani, a na klik dugmeta se prikazu, mrzelo me da menjam imena metoda tako da je samo sql promenjen
      */
 
-    @Query("SELECT * FROM notes WHERE archived == '0' ")// ovo je samo ne arhivirani
+    @Query("SELECT * FROM notes ORDER BY creationDate")// ovo je samo ne arhivirani
     abstract fun getAll(): Observable<List<NoteEntity>>
 
     @Query("SELECT * FROM notes WHERE title LIKE :search OR content LIKE :search ")
     abstract fun getAllBySearch(search: String): Observable<List<NoteEntity>>
 
-    @Query("SELECT * FROM notes")// ovo je get all
-    abstract fun getAllArchived(): Observable<List<NoteEntity>>
+    @Query("SELECT * FROM notes WHERE archived == '0' ")// ovo je get all
+    abstract fun getAllNonArchived(): Observable<List<NoteEntity>>
 
     @Insert( onConflict = OnConflictStrategy.REPLACE )//todo mozda jos
     abstract fun insert(noteEntity: NoteEntity): Completable

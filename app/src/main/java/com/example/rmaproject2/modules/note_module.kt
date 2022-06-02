@@ -1,6 +1,7 @@
 import com.example.rmaproject2.data.datasource.local.CourseDataBase
 import com.example.rmaproject2.data.datasource.local.NoteDataBase
 import com.example.rmaproject2.data.datasource.remote.CourseService
+import com.example.rmaproject2.data.models.note.StatisticsHolder
 import com.example.rmaproject2.data.repositories.CourseRepository
 import com.example.rmaproject2.data.repositories.CourseRepositoryImpl
 import com.example.rmaproject2.data.repositories.NotesRepository
@@ -12,7 +13,7 @@ import org.koin.dsl.module
 
 val noteModule = module {
 
-    viewModel { NotesViewModel(notesRepository = get()) }
+    viewModel { NotesViewModel(notesRepository = get(), StatisticsHolder(0,0,0,0,0))}
 
     single<NotesRepository> { NotesRepositoryImpl(localDataSource = get()) }
 

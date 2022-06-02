@@ -1,7 +1,6 @@
 package com.example.rmaproject2.presentation.view.fragments
 
 import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -24,7 +23,11 @@ import com.example.rmaproject2.presentation.view.states.NoteState
 import com.example.rmaproject2.presentation.viewModels.NotesViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.temporal.TemporalQueries.localDate
+import java.util.*
+
 
 class NotesFragment : Fragment(R.layout.fragment_notes) {
 
@@ -38,7 +41,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentNotesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -64,9 +67,9 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     private fun initListeners() {
         binding.switch1.setOnClickListener {//todo ima bug opravi ga (kada se vise puta arhivira promeni se ekran)
             if (binding.switch1.isChecked) {
-                noteViewModel.getAllArchived()
-            } else {
                 noteViewModel.getAll()
+            } else {
+                noteViewModel.getAllNonArchived()
             }
         }
 
@@ -87,7 +90,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             Timber.e(noteState.toString())
             renderState(noteState)
         })
-        noteViewModel.getAll()
+        noteViewModel.getAllNonArchived()
+
+        noteViewModel.countExistingStatistics()
+
     }
 
     private fun renderState(state: NoteState) {
@@ -112,7 +118,9 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     }
 
     private val addNoteActivity: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == RESULT_OK) {
+        val date = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant())
+
+        if (it.resultCode == RESULT_OK) {
                 val data = it.data
                 val title = data?.getStringExtra("title")
                 val content = data?.getStringExtra("content")
@@ -122,7 +130,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                             0,
                             title,
                             content,
-                            LocalDateTime.now().toString(),
+                            date,
                             false
                         )
                     )

@@ -6,25 +6,29 @@ import com.example.rmaproject2.data.models.note.Note
 import com.example.rmaproject2.presentation.contract.NoteContract
 import com.example.rmaproject2.presentation.view.fragments.NotesFragment
 
-class NotesViewHolder(private val itemBinding: NoteItemBinding, private val noteViewModel: NoteContract.ViewModel, private val notesFragment: NotesFragment) : RecyclerView.ViewHolder(itemBinding.root) {
+class NotesViewHolder(private val itemBinding: NoteItemBinding,/*onItemClicked: (Int) -> Unit ,*/private val noteViewModel: NoteContract.ViewModel, private val notesFragment: NotesFragment) : RecyclerView.ViewHolder(itemBinding.root) {
+
 
 
     init{
-        itemBinding.archiveBtn.setOnClickListener{
+        itemBinding.archiveBtn.setOnClickListener{ //todo uradi call back metodu koja se vuce iz fragmenta
             val bool: Boolean = itemBinding.archived.text.toString() == "false"
             itemBinding.archived.text = bool.toString()
             noteViewModel.changeArchived(itemBinding.id.text.toString().toLong(), bool)
         }
 
+//        itemBinding.archiveBtn.setOnClickListener{
+////            onItemClicked.invoke()
+//        }
+
         itemBinding.deleteBtn.setOnClickListener{
-            noteViewModel.deleteById(itemBinding.id.text.toString().toLong())
+            noteViewModel.deleteById(itemBinding.id.text.toString().toLong())//
         }
 
         itemBinding.editBtn.setOnClickListener{
             notesFragment.startEditActivity(itemBinding.notesTitle.text.toString(), itemBinding.noteContent.text.toString(), itemBinding.id.text.toString().toLong())
         }
     }
-
 
     fun bind(note: Note){
         itemBinding.notesTitle.text = note.title

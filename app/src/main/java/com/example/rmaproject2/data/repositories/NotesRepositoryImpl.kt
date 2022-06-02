@@ -44,9 +44,9 @@ class NotesRepositoryImpl(private val localDataSource: NoteDao) : NotesRepositor
             }
     }
 
-    override fun getAllArchived(): Observable<List<Note>> {
+    override fun getAllNonArchived(): Observable<List<Note>> {
         return localDataSource
-            .getAllArchived()
+            .getAllNonArchived()
             .map { it ->
                 it.map {
                     Note(
