@@ -6,27 +6,30 @@ import com.example.rmaproject2.data.models.note.Note
 import com.example.rmaproject2.presentation.contract.NoteContract
 import com.example.rmaproject2.presentation.view.fragments.NotesFragment
 
-class NotesViewHolder(private val itemBinding: NoteItemBinding,/*onItemClicked: (Int) -> Unit ,*/private val noteViewModel: NoteContract.ViewModel, private val notesFragment: NotesFragment) : RecyclerView.ViewHolder(itemBinding.root) {
-
-
+class NotesViewHolder(
+    private val itemBinding: NoteItemBinding,
+    val archiveNote: (Long, Boolean) -> Unit,
+    val deleteById: (Long) -> Unit,
+    val startEditActivity: (String, String, Long) -> Unit
+) : RecyclerView.ViewHolder(itemBinding.root) {
 
     init{
-        itemBinding.archiveBtn.setOnClickListener{ //todo uradi call back metodu koja se vuce iz fragmenta
+        itemBinding.archiveBtn.setOnClickListener{
             val bool: Boolean = itemBinding.archived.text.toString() == "false"
             itemBinding.archived.text = bool.toString()
-            noteViewModel.changeArchived(itemBinding.id.text.toString().toLong(), bool)
+//            noteViewModel.changeArchived(itemBinding.id.text.toString().toLong(), bool)
+            archiveNote(itemBinding.id.text.toString().toLong(), bool)
         }
 
-//        itemBinding.archiveBtn.setOnClickListener{
-////            onItemClicked.invoke()
-//        }
-
         itemBinding.deleteBtn.setOnClickListener{
-            noteViewModel.deleteById(itemBinding.id.text.toString().toLong())//
+//            noteViewModel.deleteById(itemBinding.id.text.toString().toLong())//
+            deleteById(itemBinding.id.text.toString().toLong())
         }
 
         itemBinding.editBtn.setOnClickListener{
-            notesFragment.startEditActivity(itemBinding.notesTitle.text.toString(), itemBinding.noteContent.text.toString(), itemBinding.id.text.toString().toLong())
+//            notesFragment.startEditActivity(itemBinding.notesTitle.text.toString(), itemBinding.noteContent.text.toString(), itemBinding.id.text.toString().toLong())
+            startEditActivity(itemBinding.notesTitle.text.toString(), itemBinding.noteContent.text.toString(), itemBinding.id.text.toString().toLong())
+
         }
     }
 

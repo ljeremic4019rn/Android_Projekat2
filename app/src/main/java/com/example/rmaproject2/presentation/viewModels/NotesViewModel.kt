@@ -145,7 +145,7 @@ class NotesViewModel (private val notesRepository: NotesRepository, override val
 
     @SuppressLint("CheckResult")
     override fun countExistingStatistics() {
-        var result: List<Note>? = null
+        var result: List<Note>?
 
         notesRepository
             .getAll()

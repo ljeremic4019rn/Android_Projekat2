@@ -60,7 +60,11 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     private fun initRecycler() {
         binding.notesRV.layoutManager = LinearLayoutManager(context)
-        adapter = NotesAdapter(noteViewModel, this)
+        adapter = NotesAdapter(
+            {id, bool -> noteViewModel.changeArchived(id,bool)},
+            {id -> noteViewModel.deleteById(id)},
+            {text, content, id -> startEditActivity(text, content,id)}
+            )
         binding.notesRV.adapter = adapter
     }
 
