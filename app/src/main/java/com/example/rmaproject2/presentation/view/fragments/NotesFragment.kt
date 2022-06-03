@@ -64,7 +64,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             {id, bool -> noteViewModel.changeArchived(id,bool)},
             {id -> noteViewModel.deleteById(id)},
             {text, content, id -> startEditActivity(text, content,id)}
-            )
+        )
         binding.notesRV.adapter = adapter
     }
 
@@ -95,9 +95,6 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             renderState(noteState)
         })
         noteViewModel.getAllNonArchived()
-
-        noteViewModel.countExistingStatistics()
-
     }
 
     private fun renderState(state: NoteState) {

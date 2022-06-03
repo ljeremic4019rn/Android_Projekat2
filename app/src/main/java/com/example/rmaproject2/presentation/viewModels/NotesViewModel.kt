@@ -16,11 +16,35 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.time.LocalDateTime
 
-class NotesViewModel (private val notesRepository: NotesRepository, override val statisticsHolder: StatisticsHolder) : ViewModel(), NoteContract.ViewModel  {
+@SuppressLint("CheckResult")
+class NotesViewModel(
+    private val notesRepository: NotesRepository,
+    override val statisticsHolder: StatisticsHolder
+) : ViewModel(), NoteContract.ViewModel {
     private val subscriptions = CompositeDisposable()
     override val noteState: MutableLiveData<NoteState> = MutableLiveData()
 
-    override fun getAll(){
+    init {//uzimamo saljemo listu svih notova u statisuku
+        var result: List<Note>?
+        notesRepository
+            .getAll()
+            .subscribe(
+                { it ->
+                    result = NoteState.Success(it).notes
+                    result!!.forEach { println("PRINT $it") }
+                    statisticsHolder.fillWithExistingData(result!!.reversed())
+                },
+                {
+                    noteState.value = NoteState.Error("Error happened while fetching data from db")
+                    Timber.e(it)
+                },
+                {
+                    Timber.e("ON COMPLETE")
+                }
+            )
+    }
+
+    override fun getAll() {
         val subscription = notesRepository
             .getAll()
             .subscribeOn(Schedulers.io())
@@ -31,7 +55,8 @@ class NotesViewModel (private val notesRepository: NotesRepository, override val
                 },
                 {
                     noteState.value = NoteState.Error("Error happened while fetching data from db")
-                    Timber.e(it)                },
+                    Timber.e(it)
+                },
                 {
                     Timber.e("ON COMPLETE")
                 }
@@ -39,7 +64,7 @@ class NotesViewModel (private val notesRepository: NotesRepository, override val
         subscriptions.add(subscription)
     }
 
-    override fun getAllBySearch(search: String){
+    override fun getAllBySearch(search: String) {
         val subscription = notesRepository
             .getAllBySearch(search)
             .subscribeOn(Schedulers.io())
@@ -56,7 +81,8 @@ class NotesViewModel (private val notesRepository: NotesRepository, override val
                     Timber.e("ON COMPLETE")
                 }
             )
-        subscriptions.add(subscription)    }
+        subscriptions.add(subscription)
+    }
 
     override fun getAllNonArchived() {
         val subscription = notesRepository
@@ -107,7 +133,8 @@ class NotesViewModel (private val notesRepository: NotesRepository, override val
                     Timber.e(it)
                 }
             )
-        subscriptions.add(subscription)    }
+        subscriptions.add(subscription)
+    }
 
     override fun insert(noteEntity: NoteEntity) {
         val subscription = notesRepository
@@ -142,30 +169,5 @@ class NotesViewModel (private val notesRepository: NotesRepository, override val
             )
         subscriptions.add(subscription)
     }
-
-    @SuppressLint("CheckResult")
-    override fun countExistingStatistics() {
-        var result: List<Note>?
-
-        notesRepository
-            .getAll()
-            .subscribe(
-                { it ->
-                    result = NoteState.Success(it).notes
-
-                    result!!.forEach { println("PRINT $it") }
-
-                    statisticsHolder.fillWithExistingData(result!!.reversed())
-
-                },
-                {
-                    noteState.value = NoteState.Error("Error happened while fetching data from db")
-                    Timber.e(it)                },
-                {
-                    Timber.e("ON COMPLETE")
-                }
-            )
-    }
-
 
 }

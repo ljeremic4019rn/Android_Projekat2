@@ -30,10 +30,7 @@ class StatisticsHolder(
     fun fillWithExistingData(notes: List<Note>) {//notes reversed, 1st is newest
         if (boolean) {//todo popravi
             val dateNow = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant())
-
             notes.forEach {
-//            println("DATUMMM (( $dateNow - ${it.creationDate} )) == $daysBetween")
-
                 when (daysBetween(it.creationDate, dateNow)) {
                     0 -> day5 += 1
                     1 -> day4 += 1
