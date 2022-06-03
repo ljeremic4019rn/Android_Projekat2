@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rmaproject2.R
-import kotlin.properties.Delegates
 
 
 class AddNoteActivity : AppCompatActivity() {

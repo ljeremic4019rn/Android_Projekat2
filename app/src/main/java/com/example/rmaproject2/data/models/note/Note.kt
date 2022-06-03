@@ -1,6 +1,5 @@
 package com.example.rmaproject2.data.models.note
 
-import java.time.LocalDate
 import java.util.*
 
 //import java.sql.Date

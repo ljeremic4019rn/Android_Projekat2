@@ -8,13 +8,11 @@ import com.example.rmaproject2.data.models.note.NoteEntity
 import com.example.rmaproject2.data.models.note.StatisticsHolder
 import com.example.rmaproject2.data.repositories.NotesRepository
 import com.example.rmaproject2.presentation.contract.NoteContract
-import com.example.rmaproject2.presentation.view.states.CourseState
 import com.example.rmaproject2.presentation.view.states.NoteState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
-import java.time.LocalDateTime
 
 @SuppressLint("CheckResult")
 class NotesViewModel(

@@ -1,6 +1,5 @@
 package com.example.rmaproject2.data.models.note
 
-import timber.log.Timber
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*

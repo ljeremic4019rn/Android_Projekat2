@@ -2,7 +2,6 @@ package com.example.rmaproject2.data.models.note
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.time.LocalDate
 import java.util.*
 
 //import java.sql.Date

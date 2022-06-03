@@ -1,7 +1,6 @@
 package com.example.rmaproject2.presentation.view.states
 
 import com.example.rmaproject2.data.models.course.Course
-import org.jetbrains.annotations.Async
 
 sealed class
 CourseState {

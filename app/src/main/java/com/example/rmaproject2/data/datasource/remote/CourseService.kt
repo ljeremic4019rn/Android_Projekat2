@@ -1,9 +1,8 @@
 package com.example.rmaproject2.data.datasource.remote
 
-import com.example.rmaproject2.data.models.course.Course
 import com.example.rmaproject2.data.models.course.CourseResponse
 import io.reactivex.Observable
-import retrofit2.http.*
+import retrofit2.http.GET
 
 
 interface  CourseService {

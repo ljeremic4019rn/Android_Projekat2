@@ -1,12 +1,7 @@
-import com.example.rmaproject2.data.datasource.local.CourseDataBase
 import com.example.rmaproject2.data.datasource.local.NoteDataBase
-import com.example.rmaproject2.data.datasource.remote.CourseService
 import com.example.rmaproject2.data.models.note.StatisticsHolder
-import com.example.rmaproject2.data.repositories.CourseRepository
-import com.example.rmaproject2.data.repositories.CourseRepositoryImpl
 import com.example.rmaproject2.data.repositories.NotesRepository
 import com.example.rmaproject2.data.repositories.NotesRepositoryImpl
-import com.example.rmaproject2.presentation.viewModels.CourseViewModel
 import com.example.rmaproject2.presentation.viewModels.NotesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

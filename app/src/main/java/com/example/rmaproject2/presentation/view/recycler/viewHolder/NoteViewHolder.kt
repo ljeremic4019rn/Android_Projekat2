@@ -1,10 +1,8 @@
 package com.example.rmaproject2.presentation.view.recycler.viewHolder
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rmaproject2.databinding.NoteItemBinding
 import com.example.rmaproject2.data.models.note.Note
-import com.example.rmaproject2.presentation.contract.NoteContract
-import com.example.rmaproject2.presentation.view.fragments.NotesFragment
+import com.example.rmaproject2.databinding.NoteItemBinding
 
 class NoteViewHolder(
     private val itemBinding: NoteItemBinding,

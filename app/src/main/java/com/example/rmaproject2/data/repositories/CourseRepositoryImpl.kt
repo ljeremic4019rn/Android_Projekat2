@@ -4,7 +4,7 @@ import com.example.rmaproject2.data.datasource.local.CourseDao
 import com.example.rmaproject2.data.datasource.remote.CourseService
 import com.example.rmaproject2.data.models.course.CourseEntity
 import com.example.rmaproject2.data.models.course.Course
-import com.example.rmaproject2.data.models.Resource
+import com.example.rmaproject2.data.models.course.Resource
 import io.reactivex.Observable
 import timber.log.Timber
 
