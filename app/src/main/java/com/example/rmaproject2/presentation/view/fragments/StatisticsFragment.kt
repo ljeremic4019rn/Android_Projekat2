@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
@@ -21,9 +20,7 @@ import androidx.fragment.app.Fragment
 import com.example.rmaproject2.R
 import com.example.rmaproject2.presentation.contract.NoteContract
 import com.example.rmaproject2.presentation.viewModels.NotesViewModel
-
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-
 
 
 class StatisticsFragment : Fragment() {
@@ -70,7 +67,6 @@ fun Start(
                 .fillMaxSize()
                 .background(Color.White)
         ) {
-            val canvasWidth = size.width
             val canvasHeight = size.height
 
             drawLine(
