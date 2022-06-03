@@ -69,11 +69,15 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     }
 
     private fun initListeners() {
+        var bool: Int = 0
+
         binding.switch1.setOnClickListener {//todo ima bug opravi ga (kada se vise puta arhivira promeni se ekran)
             if (binding.switch1.isChecked) {
                 noteViewModel.getAll()
+                bool = 1
             } else {
                 noteViewModel.getAllNonArchived()
+                bool = 0
             }
         }
 
@@ -85,7 +89,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
         binding.notesSearch.doAfterTextChanged {
             val filter = it.toString()
-            noteViewModel.getAllBySearch(filter)
+            noteViewModel.getAllBySearch(filter, bool)
         }
     }
 

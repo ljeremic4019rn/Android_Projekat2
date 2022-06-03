@@ -62,9 +62,9 @@ class NotesViewModel(
         subscriptions.add(subscription)
     }
 
-    override fun getAllBySearch(search: String) {
+    override fun getAllBySearch(search: String, bool: Int) {
         val subscription = notesRepository
-            .getAllBySearch(search)
+            .getAllBySearch(search, bool)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

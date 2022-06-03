@@ -12,7 +12,7 @@ interface NoteContract {
         val statisticsHolder: StatisticsHolder
         //        val addDone: LiveData<AddMovieState> todo mozda
         fun getAll()
-        fun getAllBySearch(search: String)
+        fun getAllBySearch(search: String, bool: Int)
         fun getAllNonArchived()
         fun deleteById(id: Long)
         fun changeArchived(id: Long, arch: Boolean)

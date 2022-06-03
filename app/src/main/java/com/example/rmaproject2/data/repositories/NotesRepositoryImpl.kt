@@ -24,13 +24,13 @@ class NotesRepositoryImpl(private val localDataSource: NoteDao) : NotesRepositor
             }
     }
 
-    override fun getAllBySearch(search: String): Observable<List<Note>> {
+    override fun getAllBySearch(search: String, bool: Int): Observable<List<Note>> {
 
         val querySearch = "%$search%"
 
 
         return localDataSource
-            .getAllBySearch(querySearch)
+            .getAllBySearch(querySearch, bool)
             .map { it ->
                 it.map {
                     Note(

@@ -15,8 +15,8 @@ abstract class NoteDao {
     @Query("SELECT * FROM notes ORDER BY creationDate")// ovo je samo ne arhivirani
     abstract fun getAll(): Observable<List<NoteEntity>>
 
-    @Query("SELECT * FROM notes WHERE title LIKE :search OR content LIKE :search ")
-    abstract fun getAllBySearch(search: String): Observable<List<NoteEntity>>
+    @Query("SELECT * FROM notes WHERE (title LIKE :search OR content LIKE :search) AND archived == :bool")
+    abstract fun getAllBySearch(search: String, bool: Int): Observable<List<NoteEntity>>
 
     @Query("SELECT * FROM notes WHERE archived == '0' ")// ovo je get all
     abstract fun getAllNonArchived(): Observable<List<NoteEntity>>
