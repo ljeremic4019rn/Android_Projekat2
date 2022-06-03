@@ -13,7 +13,7 @@ import org.koin.dsl.module
 
 val noteModule = module {
 
-    viewModel { NotesViewModel(notesRepository = get(), StatisticsHolder(0,0,0,0,0))}
+    viewModel { NotesViewModel(notesRepository = get(), StatisticsHolder(arrayOf(0,0,0,0,0), arrayOf(0,0,0,0,0)))}
 
     single<NotesRepository> { NotesRepositoryImpl(localDataSource = get()) }
 

@@ -59,7 +59,7 @@ fun Start(
             .padding(10.dp)
     ) {
         Text(
-            text = "Note statistics in the last 5 days",
+            text = "-Statistics-",
             fontSize = 20.sp
         )
 
@@ -73,67 +73,39 @@ fun Start(
             val canvasWidth = size.width
             val canvasHeight = size.height
 
-//
-//            drawRect(
-//                color = Color.Blue,
-//                topLeft = Offset(canvasWidth / 4f, 220f),
-//                size = Size(60f, noteViewModel.statisticsHolder.getDay1()),
-//
-//            )
-//            drawRect(
-//                color = Color.Blue,
-//                topLeft = Offset(canvasWidth / 4f + 100f, 222f),
-//                size = Size(60f, noteViewModel.statisticsHolder.getDay2())
-//            )
-//            drawRect(
-//                color = Color.Blue,
-//                topLeft = Offset(canvasWidth / 4f + 200f, 222f),
-//                size = Size(60f, noteViewModel.statisticsHolder.getDay3())
-//            )
-//            drawRect(
-//                color = Color.Blue,
-//                topLeft = Offset(canvasWidth / 4f + 300f, 222f),
-//                size = Size(60f, noteViewModel.statisticsHolder.getDay4())
-//            )
-//            drawRect(
-//                color = Color.Blue,
-//                topLeft = Offset(canvasWidth / 4f + 400f, 222f),
-//                size = Size(60f, noteViewModel.statisticsHolder.getDay5())
-//            )
-
             drawLine(
-                color = Color.Red,
-                strokeWidth = 50f,
+                color = Color.Blue,
+                strokeWidth = 90f,
                 start = Offset((canvasHeight / 4L),  (canvasHeight / 2L)),
-                end = Offset((canvasHeight / 4L),  (canvasHeight / 2L) - noteViewModel.statisticsHolder.gettDay1()),
+                end = Offset((canvasHeight / 4L),  (canvasHeight / 2L) - noteViewModel.statisticsHolder.getDayGraphSize(1))
             )
 
             drawLine(
-                color = Color.Red,
-                strokeWidth = 50f,
+                color = Color.Blue,
+                strokeWidth = 90f,
                 start = Offset((canvasHeight / 4L + 100L),  (canvasHeight / 2L)),
-                end = Offset((canvasHeight / 4L) + 100L,  (canvasHeight / 2L) - noteViewModel.statisticsHolder.gettDay2()),
+                end = Offset((canvasHeight / 4L) + 100L,  (canvasHeight / 2L) - noteViewModel.statisticsHolder.getDayGraphSize(2))
             )
 
             drawLine(
-                color = Color.Red,
-                strokeWidth = 50f,
+                color = Color.Blue,
+                strokeWidth = 90f,
                 start = Offset((canvasHeight / 4L) + 200L,  (canvasHeight / 2L)),
-                end = Offset((canvasHeight / 4L) + 200L,  (canvasHeight / 2L) - noteViewModel.statisticsHolder.gettDay3()),
+                end = Offset((canvasHeight / 4L) + 200L,  (canvasHeight / 2L) - noteViewModel.statisticsHolder.getDayGraphSize(3))
             )
 
             drawLine(
-                color = Color.Red,
-                strokeWidth = 50f,
+                color = Color.Blue,
+                strokeWidth = 90f,
                 start = Offset((canvasHeight / 4L) + 300L,  (canvasHeight / 2L)),
-                end = Offset((canvasHeight / 4L) + 300L,  (canvasHeight / 2L) - noteViewModel.statisticsHolder.gettDay4()),
+                end = Offset((canvasHeight / 4L) + 300L,  (canvasHeight / 2L) - noteViewModel.statisticsHolder.getDayGraphSize(4))
             )
 
             drawLine(
-                color = Color.Red,
-                strokeWidth = 50f,
+                color = Color.Blue,
+                strokeWidth = 90f,
                 start = Offset((canvasHeight / 4L) + 400L,  (canvasHeight / 2L)),
-                end = Offset((canvasHeight / 4L) + 400L,  (canvasHeight / 2L) - noteViewModel.statisticsHolder.gettDay5()),
+                end = Offset((canvasHeight / 4L) + 400L,  (canvasHeight / 2L) - noteViewModel.statisticsHolder.getDayGraphSize(5))
             )
         }
     }

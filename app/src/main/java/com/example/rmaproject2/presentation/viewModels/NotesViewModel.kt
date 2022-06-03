@@ -118,6 +118,8 @@ class NotesViewModel(
                 }
             )
         subscriptions.add(subscription)
+
+        statisticsHolder.cutGraphSizes()
     }
 
     override fun changeArchived(id: Long, arch: Boolean) {
