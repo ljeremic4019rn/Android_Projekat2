@@ -6,26 +6,27 @@ import com.example.rmaproject2.databinding.NoteItemBinding
 
 class NoteViewHolder(
     private val itemBinding: NoteItemBinding,
-    val archiveNote: (Long, Boolean) -> Unit,
-    val deleteById: (Long) -> Unit,
-    val startEditActivity: (String, String, Long) -> Unit
+    val archiveNote: (position: Int) -> Unit,
+    val deleteById: (position: Int) -> Unit,
+    val startEditActivity: (position: Int) -> Unit//saljemo mu poziciju/ id itema iz recycler
 ) : RecyclerView.ViewHolder(itemBinding.root) {
 
     init{
         itemBinding.archiveBtn.setOnClickListener{
-            val bool: Boolean = itemBinding.archived.text.toString() == "false"
-            itemBinding.archived.text = bool.toString()
-            archiveNote(itemBinding.id.text.toString().toLong(), bool)
+//            val bool: Boolean = itemBinding.archived.text.toString() == "false"
+//            itemBinding.archived.text = bool.toString()
+            archiveNote(layoutPosition)//layoutPosition je onaj na koji smo kliknuli
         }
 
         itemBinding.deleteBtn.setOnClickListener{
-            deleteById(itemBinding.id.text.toString().toLong())
+            deleteById(layoutPosition)
         }
 
         itemBinding.editBtn.setOnClickListener{
-            startEditActivity(itemBinding.notesTitle.text.toString(), itemBinding.noteContent.text.toString(), itemBinding.id.text.toString().toLong())
+            startEditActivity(layoutPosition)
 
         }
+
     }
 
     fun bind(note: Note){

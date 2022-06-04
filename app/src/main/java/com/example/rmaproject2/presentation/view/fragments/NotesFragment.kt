@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rmaproject2.R
+import com.example.rmaproject2.data.models.note.Note
 import com.example.rmaproject2.data.models.note.NoteEntity
 import com.example.rmaproject2.databinding.FragmentNotesBinding
 import com.example.rmaproject2.presentation.contract.NoteContract
@@ -25,7 +26,6 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 import java.time.LocalDate
 import java.time.ZoneId
-import java.time.temporal.TemporalQueries.localDate
 import java.util.*
 
 
@@ -60,12 +60,21 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     private fun initRecycler() {
         binding.notesRV.layoutManager = LinearLayoutManager(context)
-        adapter = NotesAdapter(
-            {id, bool -> noteViewModel.changeArchived(id,bool)},
-            {id -> noteViewModel.deleteById(id)},
-            {text, content, id -> startEditActivity(text, content,id)}
-        )
+        adapter = NotesAdapter(::archiveButton, ::deleteButton, ::edit)//:: prosledjivanje funkcije po referenci, i ta fuja prima ceo Note element na koji smo kliknuli
         binding.notesRV.adapter = adapter
+    }
+
+    private fun archiveButton(note: Note){
+        val bool: Boolean = !note.archived//dajemo suprotno
+        noteViewModel.changeArchived(note.id, bool)
+    }
+
+    private fun deleteButton(note: Note){
+        noteViewModel.deleteById(note.id)
+    }
+
+    private fun edit(note: Note){
+        startEditActivity(note.title, note.content, note.id)
     }
 
     private fun initListeners() {
@@ -80,6 +89,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                 bool = 0
             }
         }
+
 
         binding.addNoteBtn.setOnClickListener {
             val intent = Intent(activity, AddNoteActivity::class.java)

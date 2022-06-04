@@ -9,18 +9,18 @@ import com.example.rmaproject2.presentation.view.recycler.diff.NotesDiffCallback
 import com.example.rmaproject2.presentation.view.recycler.viewHolder.NoteViewHolder
 
 class NotesAdapter (
-    val archiveNote: (Long, Boolean) -> Unit ,
-    val deleteById: (Long) -> Unit,
-    val startEditActivity: (String, String, Long) -> Unit,
+    val archiveNote: (note: Note) -> Unit ,//ovde je note zato sto on je iz proslog (sa layoutPosition) primio objekat nota itema na koji smo kliknuli
+    val deleteById: (note: Note) -> Unit,
+    val startEditActivity: (note: Note) -> Unit,
 ) : ListAdapter<Note, NoteViewHolder>(NotesDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val itemBinding = NoteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return NoteViewHolder(
             itemBinding,
-            {id, bool -> archiveNote(id, bool)},
-            {id -> deleteById(id)},
-            {text, content, id -> startEditActivity(text,content,id)},
+            {archiveNote(getItem(it))},//get item na osnovu kordinata u gui zna na koji smo kliknuli, i salje note dalje, tj u ovu gornju funkciju
+            {deleteById(getItem(it))},
+            {startEditActivity(getItem(it))},
         )
     }
 
