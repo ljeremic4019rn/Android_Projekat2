@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rmaproject2.R
 import com.example.rmaproject2.data.models.note.Note
@@ -61,6 +62,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     private fun initRecycler() {
         binding.notesRV.layoutManager = LinearLayoutManager(context)
         adapter = NotesAdapter(::archiveButton, ::deleteButton, ::edit)//:: prosledjivanje funkcije po referenci, i ta fuja prima ceo Note element na koji smo kliknuli
+        binding.notesRV.addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
         binding.notesRV.adapter = adapter
     }
 

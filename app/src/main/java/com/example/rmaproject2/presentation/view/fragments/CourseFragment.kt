@@ -18,6 +18,7 @@ import com.example.rmaproject2.presentation.viewModels.CourseViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 
 class CourseFragment : Fragment(R.layout.fragment_course) {
 
@@ -76,6 +77,7 @@ class CourseFragment : Fragment(R.layout.fragment_course) {
     private fun initRecycler() {
         binding.courseRv.layoutManager = LinearLayoutManager(context)
         adapter = CourseAdapter()
+        binding.courseRv.addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
         binding.courseRv.adapter = adapter
     }
 
